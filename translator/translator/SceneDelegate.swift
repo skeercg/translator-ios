@@ -15,8 +15,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             let translatorView = TranslatorView()
             
             let window = UIWindow(windowScene: windowScene)
+            
+            let navigationController = UINavigationController(rootViewController: translatorView)
 
-            window.rootViewController = translatorView
+            window.rootViewController = navigationController
             self.window = window
             window.makeKeyAndVisible()
         }
