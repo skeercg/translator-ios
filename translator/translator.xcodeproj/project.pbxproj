@@ -17,6 +17,9 @@
 		315AE2E02D05929400967F1F /* InputButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 315AE2DF2D05929400967F1F /* InputButtons.swift */; };
 		315AE2E22D0592D900967F1F /* TranslationTextFields.swift in Sources */ = {isa = PBXBuildFile; fileRef = 315AE2E12D0592D900967F1F /* TranslationTextFields.swift */; };
 		315AE2E42D05BBBB00967F1F /* AppBarButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 315AE2E32D05BBBB00967F1F /* AppBarButtons.swift */; };
+		8501AC992D0CBE090089C927 /* SavedTranslationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8501AC982D0CBE090089C927 /* SavedTranslationsViewController.swift */; };
+		8501AC9B2D0CBE1F0089C927 /* TranslationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8501AC9A2D0CBE1F0089C927 /* TranslationTableViewCell.swift */; };
+		8501AC9D2D0CC12A0089C927 /* TranslationItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8501AC9C2D0CC12A0089C927 /* TranslationItem.swift */; };
 		CB412B6F1B497262D8BB75FD /* Pods_translator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C966FBC65DC95B51681FBD1F /* Pods_translator.framework */; };
 /* End PBXBuildFile section */
 
@@ -33,6 +36,9 @@
 		315AE2DF2D05929400967F1F /* InputButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputButtons.swift; sourceTree = "<group>"; };
 		315AE2E12D0592D900967F1F /* TranslationTextFields.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslationTextFields.swift; sourceTree = "<group>"; };
 		315AE2E32D05BBBB00967F1F /* AppBarButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppBarButtons.swift; sourceTree = "<group>"; };
+		8501AC982D0CBE090089C927 /* SavedTranslationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedTranslationsViewController.swift; sourceTree = "<group>"; };
+		8501AC9A2D0CBE1F0089C927 /* TranslationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslationTableViewCell.swift; sourceTree = "<group>"; };
+		8501AC9C2D0CC12A0089C927 /* TranslationItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslationItem.swift; sourceTree = "<group>"; };
 		B1CC3518BFD87A798FADAE50 /* Pods-translator.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-translator.debug.xcconfig"; path = "Target Support Files/Pods-translator/Pods-translator.debug.xcconfig"; sourceTree = "<group>"; };
 		C966FBC65DC95B51681FBD1F /* Pods_translator.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_translator.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F74A7F5AAEC8AC570FCA5917 /* Pods-translator.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-translator.release.xcconfig"; path = "Target Support Files/Pods-translator/Pods-translator.release.xcconfig"; sourceTree = "<group>"; };
@@ -94,6 +100,7 @@
 		315AE2D62D048B5800967F1F /* View */ = {
 			isa = PBXGroup;
 			children = (
+				8501AC972D0CBDED0089C927 /* SavedTranslations */,
 				315AE2DC2D05925300967F1F /* TranslatorView */,
 				315AE2D82D04C0AB00967F1F /* UIColorExtension.swift */,
 			);
@@ -117,6 +124,16 @@
 				315AE2E32D05BBBB00967F1F /* AppBarButtons.swift */,
 			);
 			path = TranslatorView;
+			sourceTree = "<group>";
+		};
+		8501AC972D0CBDED0089C927 /* SavedTranslations */ = {
+			isa = PBXGroup;
+			children = (
+				8501AC982D0CBE090089C927 /* SavedTranslationsViewController.swift */,
+				8501AC9A2D0CBE1F0089C927 /* TranslationTableViewCell.swift */,
+				8501AC9C2D0CC12A0089C927 /* TranslationItem.swift */,
+			);
+			path = SavedTranslations;
 			sourceTree = "<group>";
 		};
 		8E57844E872346724751BC07 /* Frameworks */ = {
@@ -226,7 +243,10 @@
 				315AE2E22D0592D900967F1F /* TranslationTextFields.swift in Sources */,
 				315AE2E02D05929400967F1F /* InputButtons.swift in Sources */,
 				315AE2C72D04878F00967F1F /* TranslatorView.swift in Sources */,
+				8501AC9D2D0CC12A0089C927 /* TranslationItem.swift in Sources */,
+				8501AC992D0CBE090089C927 /* SavedTranslationsViewController.swift in Sources */,
 				315AE2E42D05BBBB00967F1F /* AppBarButtons.swift in Sources */,
+				8501AC9B2D0CBE1F0089C927 /* TranslationTableViewCell.swift in Sources */,
 				315AE2C32D04878F00967F1F /* AppDelegate.swift in Sources */,
 				315AE2C52D04878F00967F1F /* SceneDelegate.swift in Sources */,
 				315AE2DE2D05926700967F1F /* LanguageButtons.swift in Sources */,

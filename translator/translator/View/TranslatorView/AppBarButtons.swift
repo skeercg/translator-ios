@@ -29,5 +29,11 @@ extension TranslatorView {
             historyButton.trailingAnchor.constraint(equalTo: translationRegion.trailingAnchor, constant: -12),
             historyButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 8),
         ])
+        
+        historyButton.addTarget(self, action: #selector(changeHeroButtonTapped), for: .touchUpInside)
+    }
+    
+    @objc private func changeHeroButtonTapped() {
+        navigationController?.pushViewController(SavedTranslationsViewController(), animated: true)
     }
 }
