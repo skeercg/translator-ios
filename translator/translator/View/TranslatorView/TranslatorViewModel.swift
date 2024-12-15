@@ -4,7 +4,7 @@ import Foundation
 class TranslatorViewModel {
     private let remoteDataSource = TranslatorRemoteDataSource()
     
-    var sourceText: String = ""
+    @Published var sourceText: String = ""
     @Published var targetText: String = ""
     
     var sourceLanguage: String = "Russian"

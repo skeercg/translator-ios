@@ -35,6 +35,16 @@ class TranslatorView: UIViewController {
                 self?.delimiterView?.isHidden = newText.isEmpty
             }
             .store(in: &cancellables)
+        
+        viewModel.$sourceText
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] newText in
+                if (newText.isEmpty) {
+                    return
+                }
+                self?.sourceLanguageTextView?.text = newText
+            }
+            .store(in: &cancellables)
     }
     
     func setupButtonsRegion() {

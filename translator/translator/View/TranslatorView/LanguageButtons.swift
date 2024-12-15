@@ -52,6 +52,7 @@ extension TranslatorView {
         
         sourceLanguageButton.addTarget(self, action: #selector(showLanguageSelector), for: .touchUpInside)
         targetLanguageButton.addTarget(self, action: #selector(showLanguageSelector), for: .touchUpInside)
+        swapButton.addTarget(self, action: #selector(swapLanguages), for: .touchUpInside)
     }
     
     @objc func showLanguageSelector(sender: UIButton) {
@@ -81,5 +82,18 @@ extension TranslatorView {
         default:
             break
         }
+    }
+    
+    @objc func swapLanguages(sender: UIButton) {
+        var temp = self.viewModel.sourceLanguage
+        self.viewModel.sourceLanguage = self.viewModel.targetLanguage
+        self.viewModel.targetLanguage = temp
+        
+        temp = self.viewModel.sourceText
+        self.viewModel.sourceText = self.viewModel.targetText
+        self.viewModel.targetText = temp
+        
+        self.sourceLanguageButton?.setTitle(self.viewModel.sourceLanguage, for: .normal)
+        self.targetLanguageButton?.setTitle(self.viewModel.targetLanguage, for: .normal)
     }
 }
