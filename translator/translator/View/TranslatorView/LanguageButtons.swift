@@ -35,13 +35,13 @@ extension TranslatorView {
             targetLanguageButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.35),
             targetLanguageButton.heightAnchor.constraint(equalToConstant: 64),
             
-            sourceLanguageButton.topAnchor.constraint(equalTo: buttonsRegion.topAnchor, constant: 24),
+            sourceLanguageButton.topAnchor.constraint(equalTo: buttonsRegion.topAnchor, constant: 18),
             sourceLanguageButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 24),
             
             swapButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             swapButton.centerYAnchor.constraint(equalTo: sourceLanguageButton.centerYAnchor),
             
-            targetLanguageButton.topAnchor.constraint(equalTo: buttonsRegion.topAnchor, constant: 24),
+            targetLanguageButton.topAnchor.constraint(equalTo: buttonsRegion.topAnchor, constant: 18),
             targetLanguageButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -24),
         ])
     }

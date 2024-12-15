@@ -32,13 +32,13 @@ extension TranslatorView {
             micButton.widthAnchor.constraint(equalToConstant: 84),
             micButton.heightAnchor.constraint(equalToConstant: 84),
             
-            micButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -36),
+            micButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -18),
             micButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             
             cameraButton.widthAnchor.constraint(equalToConstant: 60),
             cameraButton.heightAnchor.constraint(equalToConstant: 60),
             
-            cameraButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -48),
+            cameraButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -30),
             cameraButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -64),
         ])
     }

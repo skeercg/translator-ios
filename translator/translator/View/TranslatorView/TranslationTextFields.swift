@@ -83,9 +83,28 @@ extension TranslatorView: UITextViewDelegate {
         }
     }
     
+    // Лимит символов
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        return textView.text.count + (text.count - range.length) <= 90
+    }
+    
     func textViewDidChange(_ textView: UITextView) {
         self.viewModel.sourceText = textView.text
         self.viewModel.translateText()
+        
+        if textView.contentSize.height + 12 > 128 {
+            if let font = textView.font {
+                let newSize = max(font.pointSize - 1, 28)
+                self.sourceLanguageTextView?.font = font.withSize(newSize)
+                self.targetLanguageTextView?.font = font.withSize(newSize)
+            }
+        } else if textView.contentSize.height < 128 {
+            if let font = textView.font, font.pointSize < 36 {
+                let newSize = min(font.pointSize + 1, 36)
+                self.sourceLanguageTextView?.font = font.withSize(newSize)
+                self.targetLanguageTextView?.font = font.withSize(newSize)
+            }
+        }
     }
     
     func textViewDidEndEditing(_ textView: UITextView) {

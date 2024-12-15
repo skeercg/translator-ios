@@ -13,7 +13,7 @@ class TranslatorView: UIViewController {
     func setupTranslationRegion() {
         view.backgroundColor = UIColor(hex: 0x1f1f21)
         
-        let translationRegion = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height * 0.7))
+        let translationRegion = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height * 0.75))
         translationRegion.backgroundColor = UIColor(hex: 0x131313)
         
         translationRegion.layer.cornerRadius = 64
@@ -35,7 +35,7 @@ class TranslatorView: UIViewController {
     }
     
     func setupButtonsRegion() {
-        let buttonsRegion = UIView(frame: CGRect(x: 0, y: view.frame.height * 0.7, width: view.frame.width, height: view.frame.height * 0.3))
+        let buttonsRegion = UIView(frame: CGRect(x: 0, y: view.frame.height * 0.75, width: view.frame.width, height: view.frame.height * 0.25))
         buttonsRegion.backgroundColor = UIColor(hex: 0x1f1f21)
         
         view.addSubview(buttonsRegion)
