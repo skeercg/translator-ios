@@ -8,8 +8,9 @@ extension TranslatorView {
         sourceLanguageButtonConfig.background.cornerRadius = 16
         
         let sourceLanguageButton = UIButton(configuration: sourceLanguageButtonConfig)
-        sourceLanguageButton.setTitle("Russian", for: .normal)
+        sourceLanguageButton.setTitle(self.viewModel.sourceLanguage, for: .normal)
         sourceLanguageButton.translatesAutoresizingMaskIntoConstraints = false
+        sourceLanguageButton.tag = 1
         buttonsRegion.addSubview(sourceLanguageButton)
         
         var targetLanguageButtonConfig = UIButton.Configuration.filled()
@@ -18,9 +19,13 @@ extension TranslatorView {
         targetLanguageButtonConfig.background.cornerRadius = 16
         
         let targetLanguageButton = UIButton(configuration: targetLanguageButtonConfig)
-        targetLanguageButton.setTitle("English", for: .normal)
+        targetLanguageButton.setTitle(self.viewModel.targetLanguage, for: .normal)
         targetLanguageButton.translatesAutoresizingMaskIntoConstraints = false
+        targetLanguageButton.tag = 2
         buttonsRegion.addSubview(targetLanguageButton)
+        
+        self.sourceLanguageButton = sourceLanguageButton
+        self.targetLanguageButton = targetLanguageButton
         
         let swapButton = UIButton(type: .system)
         swapButton.setImage(UIImage(named: "swap_horiz_swap_horiz_symbol"), for: .normal)
@@ -44,5 +49,37 @@ extension TranslatorView {
             targetLanguageButton.topAnchor.constraint(equalTo: buttonsRegion.topAnchor, constant: 18),
             targetLanguageButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -24),
         ])
+        
+        sourceLanguageButton.addTarget(self, action: #selector(showLanguageSelector), for: .touchUpInside)
+        targetLanguageButton.addTarget(self, action: #selector(showLanguageSelector), for: .touchUpInside)
+    }
+    
+    @objc func showLanguageSelector(sender: UIButton) {
+        switch sender.tag {
+        case 1:
+            let selectorView = LanguageSelectorView(
+                selectorTitle: "Translate from",
+                onLanguageSelected: { selectedLanguage in
+                    self.viewModel.sourceLanguage = selectedLanguage
+                    self.sourceLanguageButton?.setTitle(selectedLanguage, for: .normal)
+                    print("Translate from: \(selectedLanguage)")
+                }
+            )
+            
+            present(selectorView, animated: true, completion: nil)
+        case 2:
+            let selectorView = LanguageSelectorView(
+                selectorTitle: "Translate to",
+                onLanguageSelected: { selectedLanguage in
+                    self.viewModel.targetLanguage = selectedLanguage
+                    self.targetLanguageButton?.setTitle(selectedLanguage, for: .normal)
+                    print("Translate to: \(selectedLanguage)")
+                }
+            )
+            
+            present(selectorView, animated: true, completion: nil)
+        default:
+            break
+        }
     }
 }

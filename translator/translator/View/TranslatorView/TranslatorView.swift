@@ -8,6 +8,9 @@ class TranslatorView: UIViewController {
     weak var targetLanguageTextView: UITextView?
     weak var delimiterView: UIView?
     
+    weak var sourceLanguageButton: UIButton?
+    weak var targetLanguageButton: UIButton?
+    
     private var cancellables = Set<AnyCancellable>()
     
     func setupTranslationRegion() {

@@ -7,8 +7,8 @@ class TranslatorViewModel {
     var sourceText: String = ""
     @Published var targetText: String = ""
     
-    var sourceLanguage: String = "rus"
-    var targetLanguage: String = "eng"
+    var sourceLanguage: String = "Russian"
+    var targetLanguage: String = "English"
     
     private var sourceTextSubject = PassthroughSubject<String?, Never>()
     private var cancellables = Set<AnyCancellable>()

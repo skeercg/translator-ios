@@ -30,10 +30,10 @@ extension TranslatorView {
             historyButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: -12),
         ])
         
-        historyButton.addTarget(self, action: #selector(changeHeroButtonTapped), for: .touchUpInside)
+        historyButton.addTarget(self, action: #selector(openHistory), for: .touchUpInside)
     }
     
-    @objc private func changeHeroButtonTapped() {
+    @objc private func openHistory() {
         navigationController?.pushViewController(SavedTranslationsViewController(), animated: true)
     }
 }
