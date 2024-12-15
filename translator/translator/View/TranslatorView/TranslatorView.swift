@@ -1,7 +1,14 @@
 import UIKit
+import Combine
 
 class TranslatorView: UIViewController {
+    let viewModel = TranslatorViewModel()
+    
     weak var sourceLanguageTextView: UITextView?
+    weak var targetLanguageTextView: UITextView?
+    weak var delimiterView: UIView?
+    
+    private var cancellables = Set<AnyCancellable>()
     
     func setupTranslationRegion() {
         view.backgroundColor = UIColor(hex: 0x1f1f21)
@@ -13,8 +20,18 @@ class TranslatorView: UIViewController {
         translationRegion.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
         view.addSubview(translationRegion)
         
-        setupSourceLanguageTextField(translationRegion: translationRegion)
         setupAppBarButtons(translationRegion: translationRegion)
+        setupSourceLanguageTextField(translationRegion: translationRegion)
+        setupTargetLanguageTextField(translationRegion: translationRegion)
+        setupDelimiter(translationRegion: translationRegion)
+        
+        viewModel.$targetText
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] newText in
+                self?.targetLanguageTextView?.text = newText
+                self?.delimiterView?.isHidden = newText.isEmpty
+            }
+            .store(in: &cancellables)
     }
     
     func setupButtonsRegion() {
