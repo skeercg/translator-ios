@@ -1,7 +1,7 @@
 
 import UIKit
 
-extension TranslatorView: UITextViewDelegate {    
+extension TranslatorView: UITextViewDelegate {
     func setupSourceLanguageTextField(translationRegion: UIView) {
         let toolbar = UIToolbar()
         toolbar.sizeToFit()
@@ -33,11 +33,76 @@ extension TranslatorView: UITextViewDelegate {
         ])
     }
     
+    func setupTargetLanguageTextField(translationRegion: UIView) {
+        let targetLanguageTextView = UITextView()
+        targetLanguageTextView.isEditable = false
+        targetLanguageTextView.isScrollEnabled = false
+        targetLanguageTextView.backgroundColor = .clear
+        targetLanguageTextView.font = UIFont.systemFont(ofSize: 36)
+        targetLanguageTextView.textColor = UIColor(hex: 0xa7c7fa)
+        targetLanguageTextView.translatesAutoresizingMaskIntoConstraints = false
+        
+        self.targetLanguageTextView = targetLanguageTextView
+        
+        translationRegion.addSubview(targetLanguageTextView)
+        
+        NSLayoutConstraint.activate([
+            targetLanguageTextView.topAnchor.constraint(equalTo: self.sourceLanguageTextView!.bottomAnchor, constant: 64),
+            
+            targetLanguageTextView.leadingAnchor.constraint(equalTo: translationRegion.leadingAnchor, constant: 16),
+            targetLanguageTextView.trailingAnchor.constraint(equalTo: translationRegion.trailingAnchor, constant: -16),
+        ])
+    }
+    
+    func setupDelimiter(translationRegion: UIView) {
+        let delimiterView = UIView()
+        delimiterView.backgroundColor = UIColor(hex: 0x034a78)
+        delimiterView.isHidden = false
+        delimiterView.translatesAutoresizingMaskIntoConstraints = false
+        
+        self.delimiterView = delimiterView
+
+        translationRegion.addSubview(delimiterView)
+        
+        NSLayoutConstraint.activate([
+            delimiterView.heightAnchor.constraint(equalToConstant: 2),
+            
+            delimiterView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 48),
+            delimiterView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -48),
+            
+            delimiterView.topAnchor.constraint(equalTo: self.sourceLanguageTextView!.bottomAnchor, constant: 31),
+        ])
+    }
+    
     func textViewDidBeginEditing(_ textView: UITextView) {
         if let textView = sourceLanguageTextView {
             if textView.textColor == UIColor(hex: 0x8e918e) {
                 textView.text = nil
                 textView.textColor = UIColor(hex: 0xfefbfa)
+            }
+        }
+    }
+    
+    // Лимит символов
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        return textView.text.count + (text.count - range.length) <= 90
+    }
+    
+    func textViewDidChange(_ textView: UITextView) {
+        self.viewModel.sourceText = textView.text
+        self.viewModel.translateText()
+        
+        if textView.contentSize.height + 12 > 128 {
+            if let font = textView.font {
+                let newSize = max(font.pointSize - 1, 28)
+                self.sourceLanguageTextView?.font = font.withSize(newSize)
+                self.targetLanguageTextView?.font = font.withSize(newSize)
+            }
+        } else if textView.contentSize.height < 128 {
+            if let font = textView.font, font.pointSize < 36 {
+                let newSize = min(font.pointSize + 1, 36)
+                self.sourceLanguageTextView?.font = font.withSize(newSize)
+                self.targetLanguageTextView?.font = font.withSize(newSize)
             }
         }
     }

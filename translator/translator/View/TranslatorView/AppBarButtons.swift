@@ -24,16 +24,16 @@ extension TranslatorView {
         
         NSLayoutConstraint.activate([
             favoriteButton.leadingAnchor.constraint(equalTo: translationRegion.leadingAnchor, constant: 12),
-            favoriteButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 8),
+            favoriteButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: -12),
             
             historyButton.trailingAnchor.constraint(equalTo: translationRegion.trailingAnchor, constant: -12),
-            historyButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 8),
+            historyButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: -12),
         ])
         
-        historyButton.addTarget(self, action: #selector(changeHeroButtonTapped), for: .touchUpInside)
+        historyButton.addTarget(self, action: #selector(openHistory), for: .touchUpInside)
     }
     
-    @objc private func changeHeroButtonTapped() {
+    @objc private func openHistory() {
         navigationController?.pushViewController(SavedTranslationsViewController(), animated: true)
     }
 }
