@@ -24,6 +24,8 @@
 		8501AC992D0CBE090089C927 /* SavedTranslationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8501AC982D0CBE090089C927 /* SavedTranslationsViewController.swift */; };
 		8501AC9B2D0CBE1F0089C927 /* TranslationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8501AC9A2D0CBE1F0089C927 /* TranslationTableViewCell.swift */; };
 		8501AC9D2D0CC12A0089C927 /* TranslationItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8501AC9C2D0CC12A0089C927 /* TranslationItem.swift */; };
+		853B35DE2D1327EC009BD76E /* SQLite in Frameworks */ = {isa = PBXBuildFile; productRef = 853B35DD2D1327EC009BD76E /* SQLite */; };
+		853B35E02D132AC3009BD76E /* SavedTranslationsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 853B35DF2D132AC3009BD76E /* SavedTranslationsViewModel.swift */; };
 		CB412B6F1B497262D8BB75FD /* Pods_translator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C966FBC65DC95B51681FBD1F /* Pods_translator.framework */; };
 /* End PBXBuildFile section */
 
@@ -47,6 +49,7 @@
 		8501AC982D0CBE090089C927 /* SavedTranslationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedTranslationsViewController.swift; sourceTree = "<group>"; };
 		8501AC9A2D0CBE1F0089C927 /* TranslationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslationTableViewCell.swift; sourceTree = "<group>"; };
 		8501AC9C2D0CC12A0089C927 /* TranslationItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslationItem.swift; sourceTree = "<group>"; };
+		853B35DF2D132AC3009BD76E /* SavedTranslationsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedTranslationsViewModel.swift; sourceTree = "<group>"; };
 		B1CC3518BFD87A798FADAE50 /* Pods-translator.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-translator.debug.xcconfig"; path = "Target Support Files/Pods-translator/Pods-translator.debug.xcconfig"; sourceTree = "<group>"; };
 		C966FBC65DC95B51681FBD1F /* Pods_translator.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_translator.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F74A7F5AAEC8AC570FCA5917 /* Pods-translator.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-translator.release.xcconfig"; path = "Target Support Files/Pods-translator/Pods-translator.release.xcconfig"; sourceTree = "<group>"; };
@@ -57,6 +60,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				853B35DE2D1327EC009BD76E /* SQLite in Frameworks */,
 				CB412B6F1B497262D8BB75FD /* Pods_translator.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -127,6 +131,7 @@
 		315AE2D72D048B6000967F1F /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				8501AC9C2D0CC12A0089C927 /* TranslationItem.swift */,
 				3134492D2D0DFFC600B07048 /* TranslatorRemoteDataSource.swift */,
 				3134492F2D0DFFD200B07048 /* TranslatorLocalDataSource.swift */,
 			);
@@ -151,7 +156,7 @@
 			children = (
 				8501AC982D0CBE090089C927 /* SavedTranslationsViewController.swift */,
 				8501AC9A2D0CBE1F0089C927 /* TranslationTableViewCell.swift */,
-				8501AC9C2D0CC12A0089C927 /* TranslationItem.swift */,
+				853B35DF2D132AC3009BD76E /* SavedTranslationsViewModel.swift */,
 			);
 			path = SavedTranslations;
 			sourceTree = "<group>";
@@ -181,6 +186,9 @@
 			dependencies = (
 			);
 			name = translator;
+			packageProductDependencies = (
+				853B35DD2D1327EC009BD76E /* SQLite */,
+			);
 			productName = translator;
 			productReference = 315AE2BF2D04878F00967F1F /* translator.app */;
 			productType = "com.apple.product-type.application";
@@ -209,6 +217,9 @@
 				Base,
 			);
 			mainGroup = 315AE2B62D04878F00967F1F;
+			packageReferences = (
+				853B35DC2D1327EC009BD76E /* XCRemoteSwiftPackageReference "SQLite.swift" */,
+			);
 			productRefGroup = 315AE2C02D04878F00967F1F /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -268,6 +279,7 @@
 				8501AC9D2D0CC12A0089C927 /* TranslationItem.swift in Sources */,
 				8501AC992D0CBE090089C927 /* SavedTranslationsViewController.swift in Sources */,
 				315AE2E42D05BBBB00967F1F /* AppBarButtons.swift in Sources */,
+				853B35E02D132AC3009BD76E /* SavedTranslationsViewModel.swift in Sources */,
 				8501AC9B2D0CBE1F0089C927 /* TranslationTableViewCell.swift in Sources */,
 				3134492E2D0DFFC600B07048 /* TranslatorRemoteDataSource.swift in Sources */,
 				315AE2C32D04878F00967F1F /* AppDelegate.swift in Sources */,
@@ -489,6 +501,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		853B35DC2D1327EC009BD76E /* XCRemoteSwiftPackageReference "SQLite.swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/stephencelis/SQLite.swift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.15.3;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		853B35DD2D1327EC009BD76E /* SQLite */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 853B35DC2D1327EC009BD76E /* XCRemoteSwiftPackageReference "SQLite.swift" */;
+			productName = SQLite;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 315AE2B72D04878F00967F1F /* Project object */;
 }
