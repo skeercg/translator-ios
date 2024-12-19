@@ -3,6 +3,13 @@ import Foundation
 
 class TranslatorViewModel {
     private let remoteDataSource = TranslatorRemoteDataSource()
+    private let localDataSource: TranslatorLocalDataSource = {
+        do {
+            return try TranslatorLocalDataSource()
+        } catch {
+            fatalError("Failed to initialize TranslatorLocalDataSource: \(error)")
+        }
+    }()
     
     @Published var sourceText: String = ""
     @Published var targetText: String = ""
@@ -32,6 +39,7 @@ class TranslatorViewModel {
                     DispatchQueue.main.async {
                         switch result {
                         case .success(let response):
+                            self?.localDataSource.saveTranslation(response)
                             self?.targetText = response.targetText
                         case .failure(let error):
                             print("Translation error:", error)
@@ -46,4 +54,5 @@ class TranslatorViewModel {
     func translateText() {
         sourceTextSubject.send(sourceText)
     }
+    
 }

@@ -11,6 +11,8 @@ class TranslationTableViewCell: UITableViewCell {
     
     public static let identifier = "translationItemCell"
     
+    public var onStarClick: (() -> Void)?
+    
     private let mainLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 18)
@@ -29,6 +31,7 @@ class TranslationTableViewCell: UITableViewCell {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
         imageView.tintColor = .white
+        imageView.isUserInteractionEnabled = true
         return imageView
     }()
     
@@ -39,23 +42,25 @@ class TranslationTableViewCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        self.contentView.backgroundColor = .black
         setupConstraints()
+        setupGestureRecognizers()
     }
     
     
-    public func configure(item: TranslationItem){
-        mainLabel.text = item.firstLanguageText
-        secondaryLabel.text = item.secondLanguageText
+    public func configure(item: TranslationItem, onStarClick: @escaping () -> Void){
+        mainLabel.text = item.sourceText
+        secondaryLabel.text = item.targetText
         let starImageName = item.isSaved ? "star.fill" : "star"
         starImageView.image = UIImage(systemName: starImageName)
+        self.onStarClick = onStarClick
+
     }
 
     private func setupConstraints(){
         contentView.addSubview(mainLabel)
         contentView.addSubview(secondaryLabel)
         contentView.addSubview(starImageView)
-        
-        contentView.backgroundColor = .black
         
         mainLabel.translatesAutoresizingMaskIntoConstraints = false
         secondaryLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -76,6 +81,15 @@ class TranslationTableViewCell: UITableViewCell {
             starImageView.heightAnchor.constraint(equalToConstant: 20)
             
         ])
+    }
+    
+    private func setupGestureRecognizers() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(starImageTapped))
+        starImageView.addGestureRecognizer(tapGesture)
+    }
+        
+    @objc private func starImageTapped() {
+        onStarClick?()
     }
 
 }

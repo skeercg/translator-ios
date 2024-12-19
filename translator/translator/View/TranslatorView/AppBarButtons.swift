@@ -31,9 +31,14 @@ extension TranslatorView {
         ])
         
         historyButton.addTarget(self, action: #selector(openHistory), for: .touchUpInside)
+        favoriteButton.addTarget(self, action: #selector(openFavourites), for: .touchUpInside)
     }
     
     @objc private func openHistory() {
-        navigationController?.pushViewController(SavedTranslationsViewController(), animated: true)
+        navigationController?.pushViewController(SavedTranslationsViewController(showFavourites: false), animated: true)
+    }
+    
+    @objc private func openFavourites() {
+        navigationController?.pushViewController(SavedTranslationsViewController(showFavourites: true), animated: true)
     }
 }

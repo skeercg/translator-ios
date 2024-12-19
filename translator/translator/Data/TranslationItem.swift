@@ -9,7 +9,7 @@ import Foundation
 
 
 struct TranslationItem{
-    let firstLanguageText: String
-    let secondLanguageText: String
+    let sourceText: String
+    let targetText: String
     let isSaved: Bool
 }
