@@ -1,6 +1,6 @@
 import UIKit
 
-extension TranslatorView {
+extension TranslatorView {    
     func setupAppBarButtons(translationRegion: UIView) {
         var favoriteButtonConfig = UIButton.Configuration.borderless()
         favoriteButtonConfig.preferredSymbolConfigurationForImage = UIImage.SymbolConfiguration(pointSize: 18, weight: .bold)
