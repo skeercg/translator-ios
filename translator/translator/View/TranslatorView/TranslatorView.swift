@@ -1,4 +1,5 @@
 import UIKit
+import AVFoundation
 import Combine
 
 class TranslatorView: UIViewController {
@@ -11,6 +12,10 @@ class TranslatorView: UIViewController {
     weak var sourceLanguageButton: UIButton?
     weak var targetLanguageButton: UIButton?
     
+    weak var audioButton: UIButton?
+    var audioRecorder: AVAudioRecorder?
+    var isRecording = false
+
     private var cancellables = Set<AnyCancellable>()
     
     func setupTranslationRegion() {
@@ -40,8 +45,10 @@ class TranslatorView: UIViewController {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] newText in
                 if (newText.isEmpty) {
+                    self?.sourceLanguageTextView?.textColor =  UIColor(hex: 0x8e918e)
                     return
                 }
+                self?.sourceLanguageTextView?.textColor = UIColor(hex: 0xfefbfa)
                 self?.sourceLanguageTextView?.text = newText
             }
             .store(in: &cancellables)
