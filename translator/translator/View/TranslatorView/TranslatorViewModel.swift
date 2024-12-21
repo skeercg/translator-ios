@@ -26,7 +26,7 @@ class TranslatorViewModel {
             .removeDuplicates()
             .sink { [weak self] source in
                 guard let self = self else { return }
-                guard let source = source, !source.isEmpty else {
+                guard let source = source, !source.trimmingCharacters(in: .whitespaces).isEmpty else {
                     self.targetText = ""
                     return
                 }
@@ -55,4 +55,23 @@ class TranslatorViewModel {
         sourceTextSubject.send(sourceText)
     }
     
+    func translateAudio() {
+        self.remoteDataSource.translateAudio(
+            sourceLanguage: sourceLanguage,
+            targetLanguage: targetLanguage
+        ) { [weak self] result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let response):
+                    self?.localDataSource.saveTranslation(response)
+                    self?.sourceText = response.sourceText
+                    self?.targetText = response.targetText
+                case .failure(let error):
+                    print("Translation error:", error)
+                    self?.sourceText = ""
+                    self?.targetText = ""
+                }
+            }
+        }
+    }
 }
