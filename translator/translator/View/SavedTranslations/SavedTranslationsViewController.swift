@@ -19,7 +19,7 @@ class SavedTranslationsViewController: UIViewController{
     private let translationsTableView: UITableView = {
         let tableView = UITableView()
         tableView.register(TranslationTableViewCell.self, forCellReuseIdentifier: TranslationTableViewCell.identifier)
-        tableView.backgroundColor = .black
+        tableView.backgroundColor = UIColor(hex: 0x202020)
         return tableView
     }()
     
@@ -35,25 +35,38 @@ class SavedTranslationsViewController: UIViewController{
         super.init(nibName: nil, bundle: nil)
     }
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+        extendedLayoutIncludesOpaqueBars = true
         
+        setupView()
         viewModel.loadTranslations(showFavouritesOnly: showFavourites)
         setupConstraints()
         translationsTableView.delegate = self
         translationsTableView.dataSource = self
-        self.navigationItem.backBarButtonItem?.tintColor = UIColor(hex: 0x1f1f21)
         setupObservers()
     }
     
+    private func setupView() {
+        view.backgroundColor = UIColor(hex: 0x202020)
+        
+        let textAttributes = [NSAttributedString.Key.foregroundColor:UIColor(hex: 0xfefcfc)]
+        navigationController?.navigationBar.tintColor = UIColor(hex: 0xfefcfc)
+        navigationController?.navigationBar.titleTextAttributes = textAttributes
+        if (showFavourites) {
+            title = "Saved"
+        } else {
+            title = "History"
+        }
+        
+    }
     
     private func setupConstraints(){
         view.addSubview(translationsTableView)
         translationsTableView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            translationsTableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            translationsTableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 32),
             translationsTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             translationsTableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             translationsTableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
@@ -81,6 +94,10 @@ extension SavedTranslationsViewController: UITableViewDelegate, UITableViewDataS
         guard let cell = tableView.dequeueReusableCell(withIdentifier: TranslationTableViewCell.identifier, for: indexPath) as? TranslationTableViewCell else { fatalError("No default cell provided") }
         let item = items[indexPath.row]
         cell.configure(item: item) { self.viewModel.toggleFavouriteStatus(for: item) }
+        
+        cell.textLabel?.textColor = UIColor(hex: 0xe3e3e3)
+        cell.backgroundColor = UIColor(hex: 0x202020)
+        
         return cell
     }
 }

@@ -42,7 +42,7 @@ class TranslationTableViewCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        self.contentView.backgroundColor = .black
+        self.contentView.backgroundColor = UIColor(hex: 0x202020)
         setupConstraints()
         setupGestureRecognizers()
     }
