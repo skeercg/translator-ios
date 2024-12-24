@@ -24,8 +24,11 @@
 		8501AC992D0CBE090089C927 /* SavedTranslationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8501AC982D0CBE090089C927 /* SavedTranslationsViewController.swift */; };
 		8501AC9B2D0CBE1F0089C927 /* TranslationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8501AC9A2D0CBE1F0089C927 /* TranslationTableViewCell.swift */; };
 		8501AC9D2D0CC12A0089C927 /* TranslationItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8501AC9C2D0CC12A0089C927 /* TranslationItem.swift */; };
+		8527E7682D1AF2F900573AF0 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 8527E7672D1AF2F900573AF0 /* Alamofire */; };
 		853B35DE2D1327EC009BD76E /* SQLite in Frameworks */ = {isa = PBXBuildFile; productRef = 853B35DD2D1327EC009BD76E /* SQLite */; };
 		853B35E02D132AC3009BD76E /* SavedTranslationsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 853B35DF2D132AC3009BD76E /* SavedTranslationsViewModel.swift */; };
+		854F11EF2D19D9A60065E430 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 854F11EE2D19D9A60065E430 /* CameraViewController.swift */; };
+		854F11F12D19EE190065E430 /* CapturedImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 854F11F02D19EE190065E430 /* CapturedImageView.swift */; };
 		CB412B6F1B497262D8BB75FD /* Pods_translator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C966FBC65DC95B51681FBD1F /* Pods_translator.framework */; };
 /* End PBXBuildFile section */
 
@@ -50,6 +53,9 @@
 		8501AC9A2D0CBE1F0089C927 /* TranslationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslationTableViewCell.swift; sourceTree = "<group>"; };
 		8501AC9C2D0CC12A0089C927 /* TranslationItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslationItem.swift; sourceTree = "<group>"; };
 		853B35DF2D132AC3009BD76E /* SavedTranslationsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedTranslationsViewModel.swift; sourceTree = "<group>"; };
+		854F11EE2D19D9A60065E430 /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
+		854F11F02D19EE190065E430 /* CapturedImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapturedImageView.swift; sourceTree = "<group>"; };
+		854F11F22D19EEE30065E430 /* translator.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = translator.entitlements; sourceTree = "<group>"; };
 		B1CC3518BFD87A798FADAE50 /* Pods-translator.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-translator.debug.xcconfig"; path = "Target Support Files/Pods-translator/Pods-translator.debug.xcconfig"; sourceTree = "<group>"; };
 		C966FBC65DC95B51681FBD1F /* Pods_translator.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_translator.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F74A7F5AAEC8AC570FCA5917 /* Pods-translator.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-translator.release.xcconfig"; path = "Target Support Files/Pods-translator/Pods-translator.release.xcconfig"; sourceTree = "<group>"; };
@@ -60,6 +66,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8527E7682D1AF2F900573AF0 /* Alamofire in Frameworks */,
 				853B35DE2D1327EC009BD76E /* SQLite in Frameworks */,
 				CB412B6F1B497262D8BB75FD /* Pods_translator.framework in Frameworks */,
 			);
@@ -106,6 +113,7 @@
 		315AE2C12D04878F00967F1F /* translator */ = {
 			isa = PBXGroup;
 			children = (
+				854F11F22D19EEE30065E430 /* translator.entitlements */,
 				315AE2D72D048B6000967F1F /* Data */,
 				315AE2D62D048B5800967F1F /* View */,
 				315AE2C22D04878F00967F1F /* AppDelegate.swift */,
@@ -120,6 +128,7 @@
 		315AE2D62D048B5800967F1F /* View */ = {
 			isa = PBXGroup;
 			children = (
+				854F11EC2D19D8B80065E430 /* CameraSelector */,
 				313449312D0EEC1900B07048 /* LanguageSelectorView */,
 				8501AC972D0CBDED0089C927 /* SavedTranslations */,
 				315AE2DC2D05925300967F1F /* TranslatorView */,
@@ -161,6 +170,15 @@
 			path = SavedTranslations;
 			sourceTree = "<group>";
 		};
+		854F11EC2D19D8B80065E430 /* CameraSelector */ = {
+			isa = PBXGroup;
+			children = (
+				854F11EE2D19D9A60065E430 /* CameraViewController.swift */,
+				854F11F02D19EE190065E430 /* CapturedImageView.swift */,
+			);
+			path = CameraSelector;
+			sourceTree = "<group>";
+		};
 		8E57844E872346724751BC07 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -188,6 +206,7 @@
 			name = translator;
 			packageProductDependencies = (
 				853B35DD2D1327EC009BD76E /* SQLite */,
+				8527E7672D1AF2F900573AF0 /* Alamofire */,
 			);
 			productName = translator;
 			productReference = 315AE2BF2D04878F00967F1F /* translator.app */;
@@ -219,6 +238,7 @@
 			mainGroup = 315AE2B62D04878F00967F1F;
 			packageReferences = (
 				853B35DC2D1327EC009BD76E /* XCRemoteSwiftPackageReference "SQLite.swift" */,
+				8527E7662D1AF2F900573AF0 /* XCRemoteSwiftPackageReference "Alamofire" */,
 			);
 			productRefGroup = 315AE2C02D04878F00967F1F /* Products */;
 			projectDirPath = "";
@@ -274,8 +294,10 @@
 				313449302D0DFFD200B07048 /* TranslatorLocalDataSource.swift in Sources */,
 				315AE2E22D0592D900967F1F /* TranslationTextFields.swift in Sources */,
 				315AE2E02D05929400967F1F /* InputButtons.swift in Sources */,
+				854F11EF2D19D9A60065E430 /* CameraViewController.swift in Sources */,
 				3134492C2D0DFE4C00B07048 /* TranslatorViewModel.swift in Sources */,
 				315AE2C72D04878F00967F1F /* TranslatorView.swift in Sources */,
+				854F11F12D19EE190065E430 /* CapturedImageView.swift in Sources */,
 				8501AC9D2D0CC12A0089C927 /* TranslationItem.swift in Sources */,
 				8501AC992D0CBE090089C927 /* SavedTranslationsViewController.swift in Sources */,
 				315AE2E42D05BBBB00967F1F /* AppBarButtons.swift in Sources */,
@@ -429,11 +451,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = translator/translator.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = KDK5MPQK4U;
+				DEVELOPMENT_TEAM = 5ZMU93J98W;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = translator/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "We need access to your camera to take photos.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -443,8 +468,9 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.example.translator;
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.translator.chingis;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -457,11 +483,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = translator/translator.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = KDK5MPQK4U;
+				DEVELOPMENT_TEAM = 5ZMU93J98W;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = translator/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "We need access to your camera to take photos.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -471,8 +500,9 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.example.translator;
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.translator.chingis;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -503,6 +533,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		8527E7662D1AF2F900573AF0 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.10.2;
+			};
+		};
 		853B35DC2D1327EC009BD76E /* XCRemoteSwiftPackageReference "SQLite.swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/stephencelis/SQLite.swift.git";
@@ -514,6 +552,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		8527E7672D1AF2F900573AF0 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8527E7662D1AF2F900573AF0 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
 		853B35DD2D1327EC009BD76E /* SQLite */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 853B35DC2D1327EC009BD76E /* XCRemoteSwiftPackageReference "SQLite.swift" */;

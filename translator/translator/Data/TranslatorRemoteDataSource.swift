@@ -1,4 +1,5 @@
 import Foundation
+import Alamofire
 
 struct TranslationRequest: Codable {
     let sourceLanguage: String
@@ -19,131 +20,103 @@ class TranslatorRemoteDataSource {
         targetLanguage: String,
         completion: @escaping (Result<TranslationResponse, Error>) -> Void
     ) {
-        let url = URL(string: "\(baseUrl)/translate/audio")!
-        var request = URLRequest(url: url)
-        request.httpMethod = "POST"
-        
-        let boundary = UUID().uuidString
-        request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
+        let url = "\(baseUrl)/translate/audio"
         
         let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
         let audioFileURL = documentDirectory.appendingPathComponent("recording.m4a")
-        
+
         guard FileManager.default.fileExists(atPath: audioFileURL.path) else {
             completion(.failure(NSError(domain: "FileNotFound", code: 404, userInfo: ["message": "Audio file not found at \(audioFileURL.path)"])))
             return
         }
-        
-        // Create the body
-        var body = Data()
-        
-        // Add JSON body as a form-data field
-        let jsonBody: [String: String] = [
+
+        let parameters: [String: String] = [
             "sourceLanguage": sourceLanguage,
             "targetLanguage": targetLanguage
         ]
-        if let jsonData = try? JSONSerialization.data(withJSONObject: jsonBody, options: []),
-           let jsonString = String(data: jsonData, encoding: .utf8) {
-            body.append("--\(boundary)\r\n".data(using: .utf8)!)
-            body.append("Content-Disposition: form-data; name=\"body\"\r\n\r\n".data(using: .utf8)!)
-            body.append("\(jsonString)\r\n".data(using: .utf8)!)
-        } else {
-            completion(.failure(NSError(domain: "SerializationError", code: 400, userInfo: ["message": "Failed to serialize JSON body"])))
-            return
-        }
-        
-        // Add the file as a form-data field
-        let fieldName = "file"
-        let fileName = "Example.m4a"
-        let mimeType = "audio/m4a"
-        
-        body.append("--\(boundary)\r\n".data(using: .utf8)!)
-        body.append("Content-Disposition: form-data; name=\"\(fieldName)\"; filename=\"\(fileName)\"\r\n".data(using: .utf8)!)
-        body.append("Content-Type: \(mimeType)\r\n\r\n".data(using: .utf8)!)
-        if let fileData = try? Data(contentsOf: audioFileURL) {
-            body.append(fileData)
-        } else {
-            completion(.failure(NSError(domain: "FileReadError", code: 400, userInfo: ["message": "Failed to read audio file"])))
-            return
-        }
-        body.append("\r\n".data(using: .utf8)!)
-        
-        // Add the closing boundary
-        body.append("--\(boundary)--\r\n".data(using: .utf8)!)
-        
-        // Assign the body to the request
-        request.httpBody = body
-        
-        // Send the request
-        let session = URLSession.shared
-        let task = session.dataTask(with: request) { data, response, error in
-            if let error = error {
-                completion(.failure(error))
-                return
-            }
-            
-            guard let httpResponse = response as? HTTPURLResponse, let responseData = data else {
-                completion(.failure(NSError(domain: "InvalidResponse", code: 500, userInfo: ["message": "No response from server"])))
-                return
-            }
-            
-            if httpResponse.statusCode == 200 {
-                do {
-                    let decodedResponse = try JSONDecoder().decode(TranslationResponse.self, from: responseData)
-                    completion(.success(decodedResponse))
-                } catch {
-                    completion(.failure(error))
+
+        AF.upload(
+            multipartFormData: { multipartFormData in
+                if let jsonData = try? JSONSerialization.data(withJSONObject: parameters, options: []) {
+                    multipartFormData.append(jsonData, withName: "body")
                 }
-            } else {
-                completion(.failure(NSError(domain: "ServerError", code: httpResponse.statusCode, userInfo: ["message": "Server responded with status \(httpResponse.statusCode)"])))
+
+                multipartFormData.append(audioFileURL, withName: "file", fileName: "recording.m4a", mimeType: "audio/m4a")
+            },
+            to: url
+        ).responseDecodable(of: TranslationResponse.self) { response in
+            switch response.result {
+            case .success(let translationResponse):
+                completion(.success(translationResponse))
+            case .failure(let error):
+                completion(.failure(error))
             }
         }
-        
-        task.resume()
     }
-    
+
     func translateText(
         sourceLanguage: String,
         targetLanguage: String,
         sourceText: String,
         completion: @escaping (Result<TranslationResponse, Error>) -> Void
     ) {
-        let url = URL(string: "\(baseUrl)/translate/text")!
-        var request = URLRequest(url: url)
-        request.httpMethod = "POST"
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        let url = "\(baseUrl)/translate/text"
         
         let requestBody = TranslationRequest(
             sourceLanguage: sourceLanguage,
             targetLanguage: targetLanguage,
             sourceText: sourceText
         )
-        
-        guard let jsonData = try? JSONEncoder().encode(requestBody) else {
-            completion(.failure(NSError(domain: "EncodingError", code: 0, userInfo: nil)))
+
+        AF.request(
+            url,
+            method: .post,
+            parameters: requestBody,
+            encoder: JSONParameterEncoder.default
+        ).responseDecodable(of: TranslationResponse.self) { response in
+            switch response.result {
+            case .success(let translationResponse):
+                completion(.success(translationResponse))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
+    
+    func translateImage(
+        sourceLanguage: String,
+        targetLanguage: String,
+        imagePath: String,
+        completion: @escaping (Result<TranslationResponse, Error>) -> Void
+    ) {
+        let url = "\(baseUrl)/translate/image"
+        let imageFileURL = URL(fileURLWithPath: imagePath)
+        guard FileManager.default.fileExists(atPath: imageFileURL.path) else {
+            completion(.failure(NSError(domain: "FileNotFound", code: 404, userInfo: ["message": "Image file not found at \(imageFileURL.path)"])))
             return
         }
-        request.httpBody = jsonData
-        
-        let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            if let error = error {
-                completion(.failure(error))
-                return
-            }
-            
-            guard let data = data else {
-                completion(.failure(NSError(domain: "NoDataError", code: 0, userInfo: nil)))
-                return
-            }
-            
-            
-            do {
-                let translationResponse = try JSONDecoder().decode(TranslationResponse.self, from: data)
+
+        let parameters: [String: String] = [
+            "sourceLanguage": sourceLanguage,
+            "targetLanguage": targetLanguage
+        ]
+
+        AF.upload(
+            multipartFormData: { multipartFormData in
+                if let jsonData = try? JSONSerialization.data(withJSONObject: parameters, options: []) {
+                    multipartFormData.append(jsonData, withName: "body")
+                }
+
+                multipartFormData.append(imageFileURL, withName: "image", fileName: imageFileURL.lastPathComponent, mimeType: "image/jpeg")
+            },
+            to: url
+        ).responseDecodable(of: TranslationResponse.self) { response in
+            switch response.result {
+            case .success(let translationResponse):
                 completion(.success(translationResponse))
-            } catch {
+            case .failure(let error):
                 completion(.failure(error))
             }
         }
-        task.resume()
     }
 }
