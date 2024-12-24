@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		2732A1976F2D135E0FFDC69D19FA109B /* Pods-translator-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = D5CE1587100A31E152254AE3C71A28F7 /* Pods-translator-dummy.m */; };
 		65EF9B8FAFD883A27871ED4E7BDF816C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
+		8527E76D2D1AF40000573AF0 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 8527E76C2D1AF40000573AF0 /* Alamofire */; };
+		8527E76F2D1AF40000573AF0 /* AlamofireDynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 8527E76E2D1AF40000573AF0 /* AlamofireDynamic */; };
 		C07FF374F7D80BBB9929541486A984E9 /* Pods-translator-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 436DD45342B15E8D2B362DB266D21470 /* Pods-translator-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
@@ -19,7 +21,7 @@
 		5B9DE880169C77A0051A9BA2C7A9B497 /* Pods-translator */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "Pods-translator"; path = Pods_translator.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F712DD18AEBD14A7A7F93490E7CC89F /* Pods-translator-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-translator-acknowledgements.plist"; sourceTree = "<group>"; };
 		73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		B41B70DECDDE8F70444A7E6829207B0D /* Pods-translator-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-translator-acknowledgements.markdown"; sourceTree = "<group>"; };
 		D4FC4BB18D79A663DB53C3B5001FA255 /* Pods-translator-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-translator-Info.plist"; sourceTree = "<group>"; };
 		D5CE1587100A31E152254AE3C71A28F7 /* Pods-translator-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-translator-dummy.m"; sourceTree = "<group>"; };
@@ -32,6 +34,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				65EF9B8FAFD883A27871ED4E7BDF816C /* Foundation.framework in Frameworks */,
+				8527E76F2D1AF40000573AF0 /* AlamofireDynamic in Frameworks */,
+				8527E76D2D1AF40000573AF0 /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -124,6 +128,10 @@
 			dependencies = (
 			);
 			name = "Pods-translator";
+			packageProductDependencies = (
+				8527E76C2D1AF40000573AF0 /* Alamofire */,
+				8527E76E2D1AF40000573AF0 /* AlamofireDynamic */,
+			);
 			productName = Pods_translator;
 			productReference = 5B9DE880169C77A0051A9BA2C7A9B497 /* Pods-translator */;
 			productType = "com.apple.product-type.framework";
@@ -146,7 +154,9 @@
 				en,
 			);
 			mainGroup = CF1408CF629C7361332E53B88F7BD30C;
-			minimizedProjectReferenceProxies = 0;
+			packageReferences = (
+				8527E76B2D1AF40000573AF0 /* XCRemoteSwiftPackageReference "Alamofire" */,
+			);
 			productRefGroup = 42F7E164D32C53D27F12FA65384041B6 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -403,6 +413,30 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		8527E76B2D1AF40000573AF0 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.10.2;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		8527E76C2D1AF40000573AF0 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8527E76B2D1AF40000573AF0 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+		8527E76E2D1AF40000573AF0 /* AlamofireDynamic */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8527E76B2D1AF40000573AF0 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = AlamofireDynamic;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 }

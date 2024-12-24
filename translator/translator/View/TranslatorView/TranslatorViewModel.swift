@@ -74,4 +74,25 @@ class TranslatorViewModel {
             }
         }
     }
+    
+    func translateImage(imagePath: String){
+        self.remoteDataSource.translateImage(
+            sourceLanguage: sourceLanguage,
+            targetLanguage: targetLanguage,
+            imagePath: imagePath
+        ){ [weak self] result in
+            DispatchQueue.main.async {
+                switch result{
+                case .success(let response):
+                    self?.localDataSource.saveTranslation(response)
+                    self?.sourceText = response.sourceText
+                    self?.targetText = response.targetText
+                case .failure(let error):
+                    print("Translation error", error)
+                    self?.sourceText = ""
+                    self?.targetText = ""
+                }
+            }
+        }
+    }
 }

@@ -45,6 +45,7 @@ extension TranslatorView: AVAudioRecorderDelegate {
         ])
         
         audioButton.addTarget(self, action: #selector(toggleRecording), for: .touchUpInside)
+        cameraButton.addTarget(self, action: #selector(navigateToCamera), for: .touchUpInside)
     }
     
     private func requestMicrophonePermission() {
@@ -65,6 +66,11 @@ extension TranslatorView: AVAudioRecorderDelegate {
         } else {
             startRecording()
         }
+    }
+    
+    @objc private func navigateToCamera(){
+        let cameraVC = CameraViewController(mainViewModel: viewModel)
+        present(cameraVC, animated: true, completion: nil)
     }
     
     private func startRecording() {
